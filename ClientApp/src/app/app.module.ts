@@ -41,6 +41,7 @@ import { NotificacionPinPageComponent } from './notificacion-pin-page/notificaci
       { path: 'counter', component: CounterComponent },
       { path: 'fetch-data', component: FetchDataComponent },
       { path: 'pin-page', component: PinPageComponent },
+      { path: 'operaciones', component: OperacionPageComponent },
     ])
   ],
   providers: [],
