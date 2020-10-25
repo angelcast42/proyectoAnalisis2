@@ -5,13 +5,14 @@ using System.Threading.Tasks;
 
 namespace proyectoAnalisis2.DTOS
 {
-    public class Deposito
+    public class PagoServicio
     {
         public long TarjetaId { get; set; }
-
-        public string CuentaBancaria { get; set; }
-
         public decimal Monto { get; set; }
 
+        public string Correlativo { get; set; }
+
+        //T: telefono, L: luz
+        public string TipoServicio { get; set; }
     }
 }

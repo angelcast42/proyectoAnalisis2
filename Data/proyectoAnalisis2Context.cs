@@ -16,5 +16,11 @@ namespace proyectoAnalisis2.Data
 
         public DbSet<proyectoAnalisis2.Models.CuentaBancaria> CuentaBancaria { get; set; }
         public DbSet<proyectoAnalisis2.Models.Tarjeta> Tarjeta { get; set; }
+
+        public DbSet<proyectoAnalisis2.Models.Bitacora> Bitacora { get; set; }
+
+        public DbSet<proyectoAnalisis2.Models.ServicioLuz> ServicioLuz { get; set; }
+
+        public DbSet<proyectoAnalisis2.Models.ServicioTelefono> ServicioTelefono { get; set; }
     }
 }

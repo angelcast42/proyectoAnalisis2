@@ -6,10 +6,14 @@ namespace proyectoAnalisis2.Models
 {
     public class Tarjeta
     {
-        public long TarjetaId { get; set; }
         [Key]
+        public long TarjetaId { get; set; }
+        
         [ForeignKey("CuentaBancariaId")]
         public long CuentaBancariaId { get; set; }
+
+        [ForeignKey("CuentaBancariaId")]
+        public long? CuentaBancariaAhorroId { get; set; }
 
         public string Pin { get; set; }
 

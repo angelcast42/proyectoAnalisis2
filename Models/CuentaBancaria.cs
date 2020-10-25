@@ -1,14 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace proyectoAnalisis2.Models
 {
     
     public class CuentaBancaria
     {
-        
+        [Key]
         public long CuentaBancariaId { get; set; }
 
         public string NumeroCuenta { get; set; }
