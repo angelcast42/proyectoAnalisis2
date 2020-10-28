@@ -1,0 +1,140 @@
+--Cuenta BANCARIA
+USE [cajerodb]
+GO
+
+/****** Object:  Table [dbo].[CuentaBancaria]    Script Date: 25/10/2020 11:48:59 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[CuentaBancaria](
+	[CuentaBancariaId] [bigint] NOT NULL,
+	[NumeroCuenta] [nchar](255) NULL,
+	[Banco] [nchar](255) NULL,
+	[TipoDeCuenta] [nchar](255) NULL,
+	[Saldo] [decimal](18, 0) NULL,
+	[CuentaHabiente] [nchar](255) NULL,
+ CONSTRAINT [PK_CuentaBancaria] PRIMARY KEY CLUSTERED 
+(
+	[CuentaBancariaId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+--SERVICIO LUZ
+USE [cajerodb]
+GO
+
+/****** Object:  Table [dbo].[ServicioLuz]    Script Date: 25/10/2020 11:48:46 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[ServicioLuz](
+	[ServicioLuzId] [bigint] NOT NULL,
+	[CuentaBancariaId] [bigint] NOT NULL,
+	[Correlativo] [nvarchar](100) NOT NULL,
+	[Saldo] [decimal](18, 0) NOT NULL,
+ CONSTRAINT [PK_ServicioLuz] PRIMARY KEY CLUSTERED 
+(
+	[ServicioLuzId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+ALTER TABLE [dbo].[ServicioLuz]  WITH CHECK ADD FOREIGN KEY([CuentaBancariaId])
+REFERENCES [dbo].[CuentaBancaria] ([CuentaBancariaId])
+GO
+
+
+
+--SERVICIO TELEFONO
+USE [cajerodb]
+GO
+
+/****** Object:  Table [dbo].[ServicioTelefono]    Script Date: 25/10/2020 11:48:10 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[ServicioTelefono](
+	[ServicioTelId] [bigint] NOT NULL,
+	[CuentaBancariaId] [bigint] NOT NULL,
+	[Telefono] [nvarchar](50) NOT NULL,
+	[Saldo] [decimal](18, 0) NOT NULL,
+ CONSTRAINT [PK_ServicioTelefono] PRIMARY KEY CLUSTERED 
+(
+	[ServicioTelId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+ALTER TABLE [dbo].[ServicioTelefono]  WITH CHECK ADD FOREIGN KEY([CuentaBancariaId])
+REFERENCES [dbo].[CuentaBancaria] ([CuentaBancariaId])
+GO
+
+
+
+
+---TARJETAS
+USE [cajerodb]
+GO
+
+/****** Object:  Table [dbo].[Tarjeta]    Script Date: 25/10/2020 11:47:44 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[Tarjeta](
+	[TarjetaId] [bigint] NOT NULL,
+	[CuentaBancariaId] [bigint] NOT NULL,
+	[Pin] [nchar](10) NOT NULL,
+	[Numero] [nchar](30) NOT NULL,
+	[CuentaBancariaAhorroId] [bigint] NULL,
+ CONSTRAINT [PK_Tarjeta] PRIMARY KEY CLUSTERED 
+(
+	[TarjetaId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+ALTER TABLE [dbo].[Tarjeta]  WITH CHECK ADD FOREIGN KEY([CuentaBancariaId])
+REFERENCES [dbo].[CuentaBancaria] ([CuentaBancariaId])
+GO
+
+ALTER TABLE [dbo].[Tarjeta]  WITH CHECK ADD FOREIGN KEY([CuentaBancariaAhorroId])
+REFERENCES [dbo].[CuentaBancaria] ([CuentaBancariaId])
+GO
+
+--BITACORA----
+USE [cajerodb]
+GO
+
+/****** Object:  Table [dbo].[Bitacora]    Script Date: 25/10/2020 11:47:19 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[Bitacora](
+	[Bitacoraid] [bigint] IDENTITY(1,1) NOT NULL,
+	[CuentaBancariaOrigen] [bigint] NOT NULL,
+	[CuentaBancariaDestino] [bigint] NOT NULL,
+	[Monto] [decimal](18, 0) NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[Bitacoraid] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+https://localhost:44302/api/cuentaBancarias/tarjeta/123456

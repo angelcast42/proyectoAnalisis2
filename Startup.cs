@@ -5,6 +5,8 @@ using Microsoft.AspNetCore.SpaServices.AngularCli;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.EntityFrameworkCore;
+using proyectoAnalisis2.Data;
 
 namespace proyectoAnalisis2
 {
@@ -26,6 +28,9 @@ namespace proyectoAnalisis2
             {
                 configuration.RootPath = "ClientApp/dist";
             });
+
+            services.AddDbContext<proyectoAnalisis2Context>(options =>
+                    options.UseSqlServer(Configuration.GetConnectionString("proyectoAnalisis2Context")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
