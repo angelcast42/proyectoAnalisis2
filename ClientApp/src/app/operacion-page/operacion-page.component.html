@@ -13,23 +13,23 @@
             <div class="col-lg-3">
 
             </div>
-            <div class="col-lg-2">
-                <button type="button" (click)="goNext()" class="btn btn-danger" style="margin-left: 10px;">
-                    <i class="fas fa-times fa-3x"></i>
+            <div class="col-lg-2 text-center">
+                <button type="button" (click)="goNext('deposito')" class="btn btn-item" >
+                    <i class="fas fa-coins fa-3x"></i>
                 </button>
-                <h4 style="color:#ffff;">Deposito</h4>
+                <h4 style="color:#ffff;text-align: center;margin-top: 10px;">Deposito</h4>
             </div>
-            <div class="col-lg-2">
-                <button type="button" (click)="goNext()" class="btn btn-danger" style="margin-left: 10px;">
-                    <i class="fas fa-times fa-3x"></i>
+            <div class="col-lg-2 text-center">
+                <button type="button" (click)="goNext('consultaSaldo')" class="btn btn-item" >
+                    <i class="fas fa-chart-bar fa-3x"></i>
                 </button>
-                <h4 style="color:#ffff;">Consulta de saldo</h4>            
+                <h4 style="color:#ffff;text-align: center;margin-top: 10px;">Consulta de saldo</h4>            
             </div>
-            <div class="col-lg-2">
-                <button type="button" (click)="goNext()" class="btn btn-danger" style="margin-left: 10px;">
-                    <i class="fas fa-times fa-3x"></i>
+            <div class="col-lg-2 text-center">
+                <button type="button" (click)="goNext('cambioPin')" class="btn btn-item" >
+                    <i class="far fa-edit fa-3x"></i>
                 </button>
-                <h4 style="color:#ffff;">Cambio de PIN</h4>
+                <h4 style="color:#ffff;text-align: center;margin-top: 10px;">Cambio de PIN</h4>
             </div>
             <div class="col-lg-3">
 
@@ -37,20 +37,26 @@
         </div>
         <div class="row">
             <div class="col-lg-4"></div>
-            <div class="col-lg-2">
-                <button type="button" (click)="goNext()" class="btn btn-danger" style="margin-left: 10px;">
-                    <i class="fas fa-times fa-3x"></i>
+            <div class="col-lg-2 text-center">
+                <button type="button" (click)="goNext('retiro')" class="btn btn-item" >
+                    <i class="fas fa-money-bill-wave fa-3x"></i>
                 </button>
-                <h4 style="color:#ffff;">Retiro</h4>
+                <h4 style="color:#ffff;text-align: center;margin-top: 10px;">Retiro</h4>
             </div>
-            <div class="col-lg-2">
-                <button type="button" (click)="goNext()" class="btn btn-danger" style="margin-left: 10px;">
-                    <i class="fas fa-times fa-3x"></i>
+            <div class="col-lg-2 text-center">
+                <button type="button" (click)="goNext('pago')" class="btn btn-item" >
+                    <i class="fas fa-home fa-3x"></i>
                 </button>
-                <h4 style="color:#ffff;">Pago de servicios</h4>
+                <h4 style="color:#ffff;text-align: center;margin-top: 10px;">Pago de servicios</h4>
             </div>
             <div class="col-lg-4"></div>
 
+        </div>
+        <div class="row">
+            <button type="button" (click)="goBack()" class="btn btn-cancel" >
+                <i class="fas fa-times fa-3x"></i>
+            </button>
+            <h4 style="color:#ffff;margin-top: 25px;margin-left: 10px;">Volver</h4>
         </div>
     </div>
 </div>

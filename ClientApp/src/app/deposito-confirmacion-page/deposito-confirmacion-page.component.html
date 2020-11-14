@@ -6,16 +6,15 @@
     </div>
     <div>
         <h1>
-            DIGITE EL PIN DE SU<br>
-            TARJETA
+            CONFIRMACIÓN<br>
+            DE DEPOSITO
         </h1>
         <div class="row" style="margin-top: 100px;">
             <div class="col-lg-3">
     
             </div>
             <div class="col-lg-6">
-                <input [(ngModel)]="pin" type="password" class="form-control" placeholder="PIN" >
-                <h3 *ngIf="error" style="color:#ff0000;margin-top: 10px;">Error: Pin incorrecto</h3>
+                <h3>Titular de la cuenta: {{nombreCuenta}}</h3>
             </div>
             <div class="col-lg-3">
                 
@@ -23,10 +22,22 @@
         </div>
         <div class="row" style="margin-top: 100px;">
             <div class="col-lg-3">
+    
+            </div>
+            <div class="col-lg-6">
+                <input type="text" [(ngModel)]="monto" class="form-control" placeholder="Digite el monto a depositar" >
+                <h3 *ngIf="error" style="color:#ff0000;margin-top: 10px;">Error: {{errorMessage}}</h3>
+            </div>
+            <div class="col-lg-3">
+                
+            </div>
+        </div>
+        <div class="row" style="margin-top: 50px;">
+            <div class="col-lg-3">
 
             </div>
             <div class="col-lg-3">
-                <button type="button" (click)="goBack()" class="btn btn-danger" style="margin-left: 10px;">
+                <button type="button" (click)="goNext()" class="btn btn-danger" style="margin-left: 10px;">
                     <i class="fas fa-times fa-3x"></i>
                 </button>
             </div>

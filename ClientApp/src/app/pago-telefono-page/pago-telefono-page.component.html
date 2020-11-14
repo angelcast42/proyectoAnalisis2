@@ -6,16 +6,15 @@
     </div>
     <div>
         <h1>
-            DIGITE EL PIN DE SU<br>
-            TARJETA
+            INGRESE EL NUMERO<br>
+            DE TELÉFONO
         </h1>
         <div class="row" style="margin-top: 100px;">
             <div class="col-lg-3">
     
             </div>
             <div class="col-lg-6">
-                <input [(ngModel)]="pin" type="password" class="form-control" placeholder="PIN" >
-                <h3 *ngIf="error" style="color:#ff0000;margin-top: 10px;">Error: Pin incorrecto</h3>
+                <input type="text" [(ngModel)]="telefono" class="form-control" placeholder="Numero de teléfono" >
             </div>
             <div class="col-lg-3">
                 
@@ -26,9 +25,6 @@
 
             </div>
             <div class="col-lg-3">
-                <button type="button" (click)="goBack()" class="btn btn-danger" style="margin-left: 10px;">
-                    <i class="fas fa-times fa-3x"></i>
-                </button>
             </div>
             <div class="col-lg-3">
                 <button type="button" (click)="goNext()" class="btn btn-success float-right" style="margin-right: 10px;">
@@ -44,7 +40,6 @@
 
             </div>
             <div class="col-lg-3">
-                <h4 style="color:#ffff;">Cancelar</h4>
             </div>
             <div class="col-lg-3">
                 <h4 style="text-align: right;color:#ffff;">Continuar</h4>

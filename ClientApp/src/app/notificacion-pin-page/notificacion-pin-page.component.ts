@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-notificacion-pin-page',
@@ -6,10 +7,14 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./notificacion-pin-page.component.css']
 })
 export class NotificacionPinPageComponent implements OnInit {
-
-  constructor() { }
+  tarjetaID
+  constructor(private router: Router) { 
+    this.tarjetaID=this.router.getCurrentNavigation().extras.state.tarjetaID
+  }
 
   ngOnInit() {
   }
-
+  goNext(){
+    this.router.navigate(['/']);
+  }
 }
