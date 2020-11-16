@@ -6,16 +6,15 @@
     </div>
     <div>
         <h1>
-            DIGITE EL PIN DE SU<br>
-            TARJETA
+            DIGITE EL NUMERO DE CUENTA<br>
+            A LA QUE DESEA DEPOSITAR
         </h1>
         <div class="row" style="margin-top: 100px;">
             <div class="col-lg-3">
     
             </div>
             <div class="col-lg-6">
-                <input [(ngModel)]="pin" type="password" class="form-control" placeholder="PIN" >
-                <h3 *ngIf="error" style="color:#ff0000;margin-top: 10px;">Error: Pin incorrecto</h3>
+                <input type="text" [(ngModel)]="cuenta" class="form-control" placeholder="Numero de cuenta" >
             </div>
             <div class="col-lg-3">
                 

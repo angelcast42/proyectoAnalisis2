@@ -1,0 +1,35 @@
+.logo{
+    width: 200px;
+    height: 200px;
+    background:url("/assets/img/umbanklogo1.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+    margin-left: auto;
+}
+.tarjeta{
+    width: 450px;
+    height: 450px;
+    background:url("/assets/img/tarjetainicio.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+    margin-left: auto;
+    margin-right: auto;
+}
+h1{
+    text-align: center;
+    font-weight: bold;
+}
+.btn-item{
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background-color:#00b796;
+    border-color: #00b796;
+}
+.btn-cancel{
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background-color:red;
+    border-color: red;
+}

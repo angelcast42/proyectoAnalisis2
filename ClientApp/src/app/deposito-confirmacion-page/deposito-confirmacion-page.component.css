@@ -6,10 +6,10 @@
     background-repeat: no-repeat;
     margin-left: auto;
 }
-.exito{
-    width: 400px;
-    height: 400px;
-    background:url("/assets/img/money.png");
+.tarjeta{
+    width: 450px;
+    height: 450px;
+    background:url("/assets/img/tarjetainicio.png");
     background-size: contain;
     background-repeat: no-repeat;
     margin-left: auto;

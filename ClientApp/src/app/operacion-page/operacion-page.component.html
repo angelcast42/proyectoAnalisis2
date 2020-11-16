@@ -1,1 +1,62 @@
-<p>operacion-page works!</p>
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+<div class="container">
+    <div class="row">
+        <div class="logo">
+        </div>
+    </div>
+    <div>
+        <h1>
+            SELECCIONE LA OPERACION QUE<br>
+            DESEA REALIZAR
+        </h1>
+        <div class="row" style="margin-top: 100px;">
+            <div class="col-lg-3">
+
+            </div>
+            <div class="col-lg-2 text-center">
+                <button type="button" (click)="goNext('deposito')" class="btn btn-item" >
+                    <i class="fas fa-coins fa-3x"></i>
+                </button>
+                <h4 style="color:#ffff;text-align: center;margin-top: 10px;">Deposito</h4>
+            </div>
+            <div class="col-lg-2 text-center">
+                <button type="button" (click)="goNext('consultaSaldo')" class="btn btn-item" >
+                    <i class="fas fa-chart-bar fa-3x"></i>
+                </button>
+                <h4 style="color:#ffff;text-align: center;margin-top: 10px;">Consulta de saldo</h4>            
+            </div>
+            <div class="col-lg-2 text-center">
+                <button type="button" (click)="goNext('cambioPin')" class="btn btn-item" >
+                    <i class="far fa-edit fa-3x"></i>
+                </button>
+                <h4 style="color:#ffff;text-align: center;margin-top: 10px;">Cambio de PIN</h4>
+            </div>
+            <div class="col-lg-3">
+
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-4"></div>
+            <div class="col-lg-2 text-center">
+                <button type="button" (click)="goNext('retiro')" class="btn btn-item" >
+                    <i class="fas fa-money-bill-wave fa-3x"></i>
+                </button>
+                <h4 style="color:#ffff;text-align: center;margin-top: 10px;">Retiro</h4>
+            </div>
+            <div class="col-lg-2 text-center">
+                <button type="button" (click)="goNext('pago')" class="btn btn-item" >
+                    <i class="fas fa-home fa-3x"></i>
+                </button>
+                <h4 style="color:#ffff;text-align: center;margin-top: 10px;">Pago de servicios</h4>
+            </div>
+            <div class="col-lg-4"></div>
+
+        </div>
+        <div class="row">
+            <button type="button" (click)="goBack()" class="btn btn-cancel" >
+                <i class="fas fa-times fa-3x"></i>
+            </button>
+            <h4 style="color:#ffff;margin-top: 25px;margin-left: 10px;">Volver</h4>
+        </div>
+    </div>
+</div>

@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,Inject } from '@angular/core';
 import { Router } from '@angular/router';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-principal',
@@ -7,12 +8,17 @@ import { Router } from '@angular/router';
   styleUrls: ['./principal.component.css']
 })
 export class PrincipalComponent implements OnInit {
+  tarjeta
+  error=false
+  constructor(private router: Router,public http: HttpClient, @Inject('BASE_URL') public baseUrl: string) { 
 
-  constructor(private router: Router) { }
+  }
 
   ngOnInit() {
   }
   goNext(){
-    this.router.navigate(['/pin-page']); 
+    this.http.get<any>(this.baseUrl + 'api/cuentaBancarias/tarjeta/'+this.tarjeta).subscribe(result => {
+      this.router.navigate(['/pin-page'],{state:{tarjeta:this.tarjeta}});
+    }, error => this.error=true); 
   }
 }

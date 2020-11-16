@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore;
 using proyectoAnalisis2.Data;
 using proyectoAnalisis2.DTOS;
 using proyectoAnalisis2.Models;
-
+using Newtonsoft.Json;
 namespace proyectoAnalisis2.Controllers
 {
     [Route("api/[controller]")]
@@ -46,7 +46,8 @@ namespace proyectoAnalisis2.Controllers
             }
             else
             {
-                List<Bitacora> bitacoraList = await _context.Bitacora.Where(b => b.CuentaBancariaOrigen == cuentaBancaria.CuentaBancariaId).ToListAsync();
+                List<Bitacora> bitacoraList = await _context.Bitacora.Where(b => b.CuentaBancariaOrigen == cuentaBancaria.CuentaBancariaId ||b.CuentaBancariaDestino == cuentaBancaria.CuentaBancariaId).ToListAsync();
+                //List<Bitacora> bitacoraListCredito = await _context.Bitacora.Where(b => b.CuentaBancariaDestino == cuentaBancaria.CuentaBancariaId).ToListAsync();
                 String ultimosMovimientos = "";
                 for (int i = 0; i < bitacoraList.Count; i++)
                 {
@@ -54,13 +55,29 @@ namespace proyectoAnalisis2.Controllers
                     {
                         break;
                     }
-                    ultimosMovimientos = ultimosMovimientos + "{'CuentaDestino': "+ bitacoraList.ElementAt(i).CuentaBancariaDestino + ", 'Monto':" + bitacoraList.ElementAt(i).Monto + "},";
+                    if(i==(bitacoraList.Count-1)){
+                        if(bitacoraList.ElementAt(i).CuentaBancariaOrigen==cuentaBancaria.CuentaBancariaId){
+                            ultimosMovimientos = ultimosMovimientos + "{\"tipo\":"+"\"debito\"" + ", \"Monto\":" + bitacoraList.ElementAt(i).Monto + "}";
+                        }
+                        else{
+                            ultimosMovimientos = ultimosMovimientos + "{\"tipo\":"+"\"credito\"" + ", \"Monto\":" + bitacoraList.ElementAt(i).Monto + "}";
+                        }
+                    }
+                    else{
+                        if(bitacoraList.ElementAt(i).CuentaBancariaOrigen==cuentaBancaria.CuentaBancariaId){
+                            ultimosMovimientos = ultimosMovimientos + "{\"tipo\":"+"\"debito\"" + ", \"Monto\":" + bitacoraList.ElementAt(i).Monto + "},";
+                        }
+                        else{
+                            ultimosMovimientos = ultimosMovimientos + "{\"tipo\":"+"\"credito\"" + ", \"Monto\":" + bitacoraList.ElementAt(i).Monto + "},";
+                        }                    
+                    }
                 }
 
                 StandardResponse standardResponse = new StandardResponse();
                 standardResponse.Code = 200;
                 standardResponse.Message = "Consulta Exitosa";
-                standardResponse.data = "'Saldo':" + cuentaBancaria.Saldo + ", 'UltimosMovimientos': " + ultimosMovimientos;
+                String x="{\"Saldo\":" + cuentaBancaria.Saldo + ", \"UltimosMovimientos\": [" + ultimosMovimientos+"]}";
+                standardResponse.data =JsonConvert.SerializeObject(x);
                 return Ok(standardResponse);
             }
         }
@@ -71,8 +88,30 @@ namespace proyectoAnalisis2.Controllers
         [HttpGet("tarjeta/{codigo}")]
         public async Task<ActionResult<StandardResponse>> ExisteTarjeta(string codigo)
         { 
+
             Tarjeta tarjeta = await _context.Tarjeta.Where(b => b.Numero == codigo).FirstOrDefaultAsync();
             if (tarjeta == null)
+            {
+                
+                return NotFound();
+            }
+            else
+            {
+                StandardResponse standardResponse = new StandardResponse();
+                standardResponse.Code = 200;
+                standardResponse.Message = "Codigo Exitoso";
+                return Ok(standardResponse);
+            }
+        }
+        /*
+         * Retorna la cuenta bancaria por numero de cuenta
+         */
+        [HttpGet("cuentabancaria/{codigo}")]
+        public async Task<ActionResult<StandardResponse>> getCuenta(string codigo)
+        { 
+
+            CuentaBancaria cuenta = await _context.CuentaBancaria.Where(b => b.NumeroCuenta == codigo).FirstOrDefaultAsync();
+            if (cuenta == null)
             {
                 return NotFound();
             }
@@ -81,6 +120,7 @@ namespace proyectoAnalisis2.Controllers
                 StandardResponse standardResponse = new StandardResponse();
                 standardResponse.Code = 200;
                 standardResponse.Message = "Codigo Exitoso";
+                standardResponse.data=cuenta.CuentaHabiente;
                 return Ok(standardResponse);
             }
         }
@@ -112,6 +152,7 @@ namespace proyectoAnalisis2.Controllers
         [HttpPut("cambiar-pin")]
         public async Task<ActionResult<StandardResponse>> CambiarPin(CambioPin cambioPin)
         {
+            Console.Write("entro aca");
             Tarjeta tarjeta = await _context.Tarjeta.Where(b => (b.TarjetaId == cambioPin.TarjetaId && b.Pin == cambioPin.OldPin)).FirstOrDefaultAsync();
             if (tarjeta == null)
             {
@@ -167,7 +208,8 @@ namespace proyectoAnalisis2.Controllers
                 StandardResponse standardResponse = new StandardResponse();
                 standardResponse.Code = 200;
                 standardResponse.Message = "Servicio Existe";
-                standardResponse.data = "Saldo:" + servicioTelefono.Saldo + ",cuentaBancaria:" + servicioTelefono.CuentaBancariaId;
+                String x="{\"Saldo\":" + servicioTelefono.Saldo + ",\"cuentaBancaria\":" + servicioTelefono.CuentaBancariaId+"}";
+                standardResponse.data = JsonConvert.SerializeObject(x);
                 return Ok(standardResponse);
             }
         }
@@ -219,7 +261,7 @@ namespace proyectoAnalisis2.Controllers
             long cuenta = tarjeta.CuentaBancariaId;
             Bitacora bitacora = new Bitacora();
             bitacora.CuentaBancariaDestino = cuenta;
-            bitacora.CuentaBancariaOrigen = cuenta;
+            bitacora.CuentaBancariaOrigen = '0';
             bitacora.Monto = retiro.Monto;
             _context.Bitacora.Add(bitacora);
             await _context.SaveChangesAsync();
